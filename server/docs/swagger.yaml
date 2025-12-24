@@ -1,0 +1,83 @@
+basePath: /api
+definitions:
+  handlers.LoginInput:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  handlers.RegisterInput:
+    properties:
+      password:
+        type: string
+      role:
+        type: string
+      username:
+        type: string
+    type: object
+  models.User:
+    properties:
+      id:
+        type: integer
+      role:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API untuk sistem pengadaan barang (Technical Test).
+  title: Procurement System API
+  version: "1.0"
+paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Credential
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.LoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Login user
+      tags:
+      - Auth
+  /register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Data User
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.RegisterInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.User'
+      summary: Register user baru
+      tags:
+      - Auth
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

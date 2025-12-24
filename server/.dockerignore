@@ -1,0 +1,6 @@
+.git
+.vscode
+vendor
+tmp
+*.exe
+*.log
